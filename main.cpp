@@ -1,6 +1,7 @@
 #include "GlfwCanvas.h"
 #include <cairo/cairo.h>
 #include <math.h>  
+#include <stdlib.h>
 
 const int WindowSize = 1024;
 

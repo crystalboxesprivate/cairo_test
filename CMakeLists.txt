@@ -7,7 +7,10 @@ if(WIN32)
   add_executable(cairo_ogl_canvas 
     glad.c
     Shaders.h
+    
     GlfwCanvas.h
+    GlfwCanvas.cpp
+
     GLStuff.h
     Misc.h
     main.cpp

@@ -58,7 +58,11 @@ public:
 
   void setFrameTexture(unsigned char *Data, int TextureWidth,
                        int TextureHeight) {
-    glGenTextures(1, &FrameTexture);
+    if (!TextureCreated) {
+      glGenTextures(1, &FrameTexture);
+
+      TextureCreated = true;
+    }
     glBindTexture(GL_TEXTURE_2D, FrameTexture);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -67,7 +71,7 @@ public:
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TextureWidth, TextureHeight, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, Data);
-
+                 
     glUseProgram(Program);
     glUniform1i(glGetUniformLocation(Program, "Frame"), 0);
   }
@@ -107,4 +111,5 @@ private:
   GLuint Program;
   int Width, Height;
   unsigned int FrameTexture;
+  bool TextureCreated = false;
 };

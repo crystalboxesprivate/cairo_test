@@ -1,6 +1,7 @@
 *.vscode*
 *.vs*
 build/*
+*.DS_Store
 
 ext/*
 !ext/CMakeLists.txt

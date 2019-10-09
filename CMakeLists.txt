@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
+project(cairo_test)
 
-add_subdirectory(lib)
+set(MYROOTDIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(ext)
-
 project(cairo_test)
 include_directories(include)
+
 
 add_executable(cairo_test 
   include/Shaders.h
@@ -15,4 +16,4 @@ add_executable(cairo_test
   src/main.cpp
 )
 
-target_link_libraries(cairo_test PUBLIC glfw cairo glad)
+target_link_libraries(cairo_test PUBLIC glfw cairo-static glad)

@@ -5,7 +5,7 @@ endif()
 
 function(UpdateExternalLib name url rev)
     set(need_checkout FALSE)
-    set(external_folder "${C_ROOT_DIR}/external")
+    set(external_folder "${MYROOTDIR}/ext")
     set(external_lib_folder "${external_folder}/${name}")
     if(EXISTS ${external_lib_folder})
         message(STATUS "Updating ${name} to revision ${rev}...")
@@ -28,7 +28,7 @@ function(UpdateExternalLib name url rev)
     endif()
 endfunction()
 
-UpdateExternalLib("cairo" "https://github.com/crystalboxes/cairo.git" "c7a0b32d902534299f3f930d7e3d67c21bfa5320")
+UpdateExternalLib("cairo" "https://github.com/crystalboxes/cairo.git" "a631ba43ec5603dbec76429d31d0a03cc67962c0")
 UpdateExternalLib("glfw" "https://github.com/glfw/glfw.git" "d25248343e248337284dfbe5ecd1eddbd37ae66d")
 
 # Configure cairo

@@ -1,5 +1,9 @@
 *.vscode*
+*.vs*
 build/*
+
+ext/*
+!ext/CMakeLists.txt
 
 # Compiled Object files
 *.slo

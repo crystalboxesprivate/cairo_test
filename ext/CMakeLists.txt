@@ -28,7 +28,7 @@ function(UpdateExternalLib name url rev)
     endif()
 endfunction()
 
-UpdateExternalLib("cairo" "https://github.com/crystalboxes/cairo.git" "a631ba43ec5603dbec76429d31d0a03cc67962c0")
+UpdateExternalLib("cairo" "https://github.com/crystalboxes/cairo.git" "57c7a46ec71dc9749aa435df428c1d0b2e10e78a")
 UpdateExternalLib("glfw" "https://github.com/glfw/glfw.git" "d25248343e248337284dfbe5ecd1eddbd37ae66d")
 
 # Configure cairo

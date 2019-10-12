@@ -4,8 +4,7 @@ project(cairo_test)
 set(MYROOTDIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(ext)
 project(cairo_test)
-include_directories(include)
-
+add_subdirectory(lib)
 
 add_executable(cairo_test 
   include/Shaders.h
@@ -16,4 +15,5 @@ add_executable(cairo_test
   src/main.cpp
 )
 
+target_include_directories(cairo_test PUBLIC include)
 target_link_libraries(cairo_test PUBLIC glfw cairo-static glad)

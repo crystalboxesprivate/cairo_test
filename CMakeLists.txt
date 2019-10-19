@@ -7,11 +7,8 @@ project(cairo_test)
 add_subdirectory(lib)
 
 add_executable(cairo_test 
-  include/Shaders.h
-  include/GlfwCanvas.h
-  include/GLStuff.h
-  include/Misc.h
-  src/GlfwCanvas.cpp
+  include/gl_canvas.h
+  src/gl_canvas.cpp
   src/main.cpp
 )
 

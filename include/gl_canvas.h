@@ -15,7 +15,6 @@ public:
   // set shaders
   void setup();
   bool loop();
-  void destroy();
   void set_frame_texture(unsigned char *data, int texture_width,
                        int texture_height);
 

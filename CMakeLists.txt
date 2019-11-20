@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(cairo_test)
 set(MYROOTDIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-option(BUILD_CAIRO_TEST "Build cairo test" ON)
+option(BUILD_CAIRO_TEST "Build cairo test" OFF)
 
 if(EXISTS ${MYROOTDIR}/lib/skia)
   option(BUILD_SKIA_TEST "Build skia test" ON)
@@ -34,26 +34,19 @@ if (BUILD_SKIA_TEST)
   if (MSVC)
     option(USE_MSVC_RUNTIME_LIBRARY_DLL "" OFF)
     set(SKIA_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/skia/lib/win)
+    message(STATUS ${CMAKE_BUILD_TYPE})
 
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
       set(SKIA_LIB_DIR ${SKIA_LIB_DIR}/debug)
       set (SKIA_LIBS
-        ${SKIA_LIB_DIR}/icuind.lib
         ${SKIA_LIB_DIR}/icudtd.lib
-        ${SKIA_LIB_DIR}/icuiod.lib
-        ${SKIA_LIB_DIR}/icutud.lib
         ${SKIA_LIB_DIR}/icuucd.lib
-        msvcrtd.lib
       )
     else()
       set(SKIA_LIB_DIR ${SKIA_LIB_DIR}/release)
       set (SKIA_LIBS 
-        ${SKIA_LIB_DIR}/icuin.lib      
         ${SKIA_LIB_DIR}/icudt.lib      
-        ${SKIA_LIB_DIR}/icuio.lib      
-        ${SKIA_LIB_DIR}/icutu.lib      
         ${SKIA_LIB_DIR}/icuuc.lib      
-        msvcrt.lib
       )
     endif()
 
@@ -65,8 +58,6 @@ if (BUILD_SKIA_TEST)
       ${SKIA_LIB_DIR}/skottie.lib      
       ${SKIA_LIB_DIR}/harfbuzz.lib     
     )
-    set_target_properties(skia_test PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} /MT /D_ITERATOR_DEBUG_LEVEL=0")
-
   endif(MSVC)
 
   target_include_directories(skia_test PUBLIC include ext/skia)

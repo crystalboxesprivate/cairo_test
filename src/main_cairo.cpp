@@ -56,7 +56,6 @@ private:
 
 int main(void) {
 	const int WINDOW_SIZE = 1024;
-
 	CairoApp app;
 	app.set_dimensions(WINDOW_SIZE, WINDOW_SIZE);
 	app.init();

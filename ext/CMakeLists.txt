@@ -28,16 +28,20 @@ function(UpdateExternalLib name url rev)
     endif()
 endfunction()
 
-UpdateExternalLib("cairo" "https://github.com/crystalboxes/cairo.git" "d02a835fa2f287ef44dfa3203bbc9b077fc5ec3c")
+
+if (BUILD_SKIA_TEST)
+  UpdateExternalLib("skia" "https://github.com/google/skia.git" "78fa08b279c5929fdeff66c163e68878d1ece39b")
+endif()
+
+if (BUILD_CAIRO_TEST)
+  UpdateExternalLib("cairo" "https://github.com/crystalboxes/cairo.git" "d02a835fa2f287ef44dfa3203bbc9b077fc5ec3c")
+
+  # Configure cairo
+  option(CAIRO_BUILD_SHARED "Build shared" OFF)
+  add_subdirectory(cairo)
+endif()
+
 UpdateExternalLib("glfw" "https://github.com/glfw/glfw.git" "d25248343e248337284dfbe5ecd1eddbd37ae66d")
-UpdateExternalLib("skia" "https://github.com/prideout/skia.git" "c2ded4cc0e52b54a06fd1a068e3e3434a34db2f7")
-
-add_subdirectory(skia)
-
-# Configure cairo
-option(CAIRO_BUILD_SHARED "Build shared" OFF)
-add_subdirectory(cairo)
-
 # Configure glfw
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)

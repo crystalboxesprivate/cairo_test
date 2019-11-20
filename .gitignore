@@ -2,6 +2,8 @@
 *.vs*
 build/*
 *.DS_Store
+build_skia.txt
+lib/skia
 
 ext/*
 !ext/CMakeLists.txt

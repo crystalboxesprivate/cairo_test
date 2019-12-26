@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(cairo_test)
 set(MYROOTDIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(CMAKE_VERBOSE_MAKEFILE on)
 
 option(BUILD_CAIRO_TEST "Build cairo test" OFF)
 
@@ -8,6 +9,10 @@ if(EXISTS ${MYROOTDIR}/lib/skia)
   option(BUILD_SKIA_TEST "Build skia test" ON)
 else()
   option(BUILD_SKIA_TEST "Build skia test" OFF)
+endif()
+
+if (BUILD_SKIA_TEST)
+  option(USE_SKIA_SHARED_LIB "Use shared skia library" ON)
 endif()
 
 add_subdirectory(ext)
@@ -38,25 +43,17 @@ if (BUILD_SKIA_TEST)
 
     if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
       set(SKIA_LIB_DIR ${SKIA_LIB_DIR}/debug)
-      set (SKIA_LIBS
-        ${SKIA_LIB_DIR}/icudtd.lib
-        ${SKIA_LIB_DIR}/icuucd.lib
-      )
     else()
       set(SKIA_LIB_DIR ${SKIA_LIB_DIR}/release)
-      set (SKIA_LIBS 
-        ${SKIA_LIB_DIR}/icudt.lib      
-        ${SKIA_LIB_DIR}/icuuc.lib      
-      )
     endif()
-
     set(SKIA_LIBS 
       ${SKIA_LIBS}
-      ${SKIA_LIB_DIR}/skia.lib       
-      ${SKIA_LIB_DIR}/sksg.lib 
+      ${SKIA_LIB_DIR}/skia.lib
+      ${SKIA_LIB_DIR}/sksg.lib
       ${SKIA_LIB_DIR}/skshaper.lib     
       ${SKIA_LIB_DIR}/skottie.lib      
       ${SKIA_LIB_DIR}/harfbuzz.lib     
+      ${SKIA_LIB_DIR}/icu.lib
     )
   endif(MSVC)
 
@@ -71,3 +68,5 @@ endif()
 
 unset(BUILD_SKIA_TEST CACHE) 
 unset(BUILD_CAIRO_TEST CACHE) 
+
+message(STATUS ${CMAKE_EXE_LINKER_FLAGS_INIT})
